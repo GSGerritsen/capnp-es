@@ -44,6 +44,7 @@ const TYPE_SIZES = new Map<number, number>([
   [Type.INT32, 4], [Type.UINT32, 4],
   [Type.INT64, 8], [Type.UINT64, 8],
   [Type.FLOAT32, 4], [Type.FLOAT64, 8],
+  [Type.ENUM, 2], // Enums are 16-bit unsigned integers
 ]);
 
 const PRIMITIVE_GETTERS = new Map<number, (offset: number, s: Struct) => any>([
@@ -58,6 +59,7 @@ const PRIMITIVE_GETTERS = new Map<number, (offset: number, s: Struct) => any>([
   [Type.UINT64, utils.getUint64],
   [Type.FLOAT32, utils.getFloat32],
   [Type.FLOAT64, utils.getFloat64],
+  [Type.ENUM, utils.getUint16], // Enums are uint16
 ]);
 
 const PRIMITIVE_SETTERS = new Map<number, (offset: number, value: any, s: Struct) => void>([
@@ -72,6 +74,7 @@ const PRIMITIVE_SETTERS = new Map<number, (offset: number, value: any, s: Struct
   [Type.UINT64, utils.setUint64],
   [Type.FLOAT32, utils.setFloat32],
   [Type.FLOAT64, utils.setFloat64],
+  [Type.ENUM, utils.setUint16], // Enums are uint16
 ]);
 
 /**
