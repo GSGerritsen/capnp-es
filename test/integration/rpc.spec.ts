@@ -5,7 +5,7 @@ import { Hash, HashFactory } from "test/fixtures/hash-factory";
 import { SimpleInterface } from "test/fixtures/simple-interface";
 import { createHash } from "node:crypto";
 import { TestRPC } from "./rpc.utils";
-import { bufferToHex } from "src/util.js";
+import { bufferToHex, encodeUtf8 } from "src/util.js";
 
 describe("rpc", () => {
   let rpc: TestRPC;
@@ -73,11 +73,11 @@ describe("rpc", () => {
     const client = async () => {
       const hash = rpc.connect().bootstrap(HashFactory).newSha1().getHash();
       hash.write((p) => {
-        const buf = new TextEncoder().encode("hello ");
+        const buf = encodeUtf8("hello ");
         p._initData(buf.byteLength).copyBuffer(buf);
       });
       hash.write((p) => {
-        const buf = new TextEncoder().encode("world");
+        const buf = encodeUtf8("world");
         p._initData(buf.byteLength).copyBuffer(buf);
       });
       const sum = await hash.sum().promise();

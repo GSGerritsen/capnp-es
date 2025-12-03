@@ -6,8 +6,6 @@ export { Message, readRawPointer } from "./message";
 
 export { ObjectSize } from "./object-size";
 
-export { SchemaLoader, type LoadedSchema } from "./schema-loader";
-
 export {
   getBitMask,
   getFloat32Mask,
